@@ -34,6 +34,14 @@ grid on;
 % butter
 
 
+% cheby1
+
+
+% cheby2
+
+
+
+
 
 %% Filtros paso altos
 % ellip (Con parámetros: Orden del filtro, rizado en la banda pasante, atenuación en la
@@ -41,6 +49,14 @@ grid on;
 
 
 % butter
+
+
+% cheby1
+
+
+% cheby2
+
+
 
 
 
@@ -53,6 +69,12 @@ grid on;
 % butter
 
 
+% cheby1
+
+
+% cheby2
+
+
 
 
 %% Filtros supresores de banda
@@ -61,4 +83,8 @@ grid on;
 
 
 % butter
+
+% cheby1
+
+% cheby2
 
