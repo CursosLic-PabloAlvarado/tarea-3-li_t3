@@ -30,6 +30,8 @@ Wh    = Wh / (Fs/2);     % Frecuencia de corte superior para paso bandas y supre
                                          % Donde 'a' y 'b' corresponden a los coeficientes
                                          % devueltos por el filtro butter (estos definen la
                                          % ecuación de diferencia del filtro digital)
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('ellip_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia.
 
@@ -58,6 +60,8 @@ Wh    = Wh / (Fs/2);     % Frecuencia de corte superior para paso bandas y supre
 %         Note que: Tiene una respuesta inherentemente plana en la banda pasante, por lo que
 %                   no necesita de un tipo de rizado
 [b, a] = butter(N, Wp_pb, 'low');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('butter_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
 
@@ -80,20 +84,21 @@ save('cheby2_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 [h, w] = freqz(b, a, 1024, Fs);
 
 
-
 %% Filtros paso altos
 % ellip % TODO: Ajustar mejor el eje y para que se vea mejor el efecto de este filtro
 [b, a] = ellip(N, Rp, Rs, Wp_pa, 'high'); % Diseño del filtro
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('ellip_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia.
 
 
-
 % butter % TODO: Ajustar mejor el eje y para que se vea mejor el efecto de este filtro
 [b, a] = butter(N, Wp_pa, 'high');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('butter_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-
 
 
 % cheby1
@@ -117,12 +122,16 @@ save('cheby2_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 %% Filtros paso bandas
 % ellip % TODO: Ajustar mejor el eje x para que se vea mejor el efecto de este filtro
 [b, a] = ellip(N, Rp, Rs, [Wl Wh]); % Diseño del filtro
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('ellip_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
 
 
 % butter % TODO: Ajustar mejor el eje x para que se vea mejor el efecto de este filtro
 [b, a] = butter(N, [Wl Wh]);
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('butter_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
 
@@ -148,12 +157,16 @@ save('cheby2_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 %% Filtros supresores de banda
 % ellip % TODO: Ajustar mejor el eje x para que se vea mejor el efecto de este filtro
 [b, a] = ellip(N, Rp, Rs, [Wl Wh], 'stop'); % Diseño del filtro
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('ellip_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
 
 
 % butter
 [b, a] = butter(N, [Wl Wh], 'stop');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('butter_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
 
