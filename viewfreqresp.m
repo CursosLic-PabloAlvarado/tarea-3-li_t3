@@ -19,7 +19,8 @@ function viewfreqresp(filename, Fs = 44100)
     % Plot de magnitud
     figure;
     subplot(2, 1, 1);
-    semilogx(w, 20*log10(abs(H)));  % Magnitud en dB
+    %semilogx(w, 20*log10(abs(H)));  % Magnitud en dB
+    semilogx(w, 20*log10(abs(H)), 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Magnitud en dB
     grid on;
     title('Respuesta en Magnitud');
     xlabel('Frecuencia [Hz]');
@@ -28,7 +29,7 @@ function viewfreqresp(filename, Fs = 44100)
 
     % Plot de fase
     subplot(2, 1, 2);
-    semilogx(w, unwrap(angle(H))*180/pi);  % Fase en grados
+    semilogx(w, unwrap(angle(H))*180/pi, 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Fase en grados
     grid on;
     title('Respuesta en Fase');
     xlabel('Frecuencia [Hz]');
