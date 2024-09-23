@@ -53,15 +53,6 @@ Wh    = Wh / (Fs/2);     % Frecuencia de corte superior para paso bandas y supre
                                   %
                                   % - w: Contiene los valores de frecuencia (en radianes por segundo) para
                                   %      los cuales se calcula la respuesta en frecuencia almacenada en h.
-figure('name', 'Paso bajos con ellip');
-plot(w, 20*log10(abs(h))) % Traza la respuesta en frecuencia del filtro.
-                          % - w traza las frecuencia en Hz para las cuales se calcula la respuesta en frecuencia.
-                          % - 20*log10(abs(h)) convierte la respuesta de frecuencia h de magnitud a decibelios (dB).
-title('Respuesta en frecuencia del filtro paso bajos diseñado con ellip')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
-
 
 % butter (Con parámetros: Orden del filtro, frecuencia de corte normalizada y tipo de filtro).
 %         Note que: Tiene una respuesta inherentemente plana en la banda pasante, por lo que
@@ -69,12 +60,6 @@ grid on;
 [b, a] = butter(N, Wp_pb, 'low');
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Paso bajos con butter');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bajos diseñado con butter')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % cheby1
@@ -84,12 +69,7 @@ grid on;
 save('cheby1_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso bajos con cheby1');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bajos diseñado con cheby1')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 % cheby2
 % cheby2 - Filtro paso bajos
@@ -98,12 +78,7 @@ grid on;
 save('cheby2_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso bajos con cheby2');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bajos diseñado con cheby2')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 
 %% Filtros paso altos
@@ -111,24 +86,14 @@ grid on;
 [b, a] = ellip(N, Rp, Rs, Wp_pa, 'high'); % Diseño del filtro
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia.
-figure('name', 'Paso altos con elip');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso altos diseñado con ellip')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 
 % butter % TODO: Ajustar mejor el eje y para que se vea mejor el efecto de este filtro
 [b, a] = butter(N, Wp_pa, 'high');
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Paso altos con butter');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso altos diseñado con butter')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 
 % cheby1
@@ -138,12 +103,6 @@ grid on;
 save('cheby1_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso altos con cheby1');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso altos diseñado con cheby1')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % cheby2
@@ -153,12 +112,6 @@ grid on;
 save('cheby2_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso altos con cheby2');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso altos diseñado con cheby2')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 %% Filtros paso bandas
@@ -166,24 +119,12 @@ grid on;
 [b, a] = ellip(N, Rp, Rs, [Wl Wh]); % Diseño del filtro
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Paso bandas con elip');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bandas diseñado con ellip')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % butter % TODO: Ajustar mejor el eje x para que se vea mejor el efecto de este filtro
 [b, a] = butter(N, [Wl Wh]);
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Paso bandas con butter');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bandas diseñado con butter')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % cheby1
@@ -193,12 +134,7 @@ grid on;
 save('cheby1_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso bandas con cheby1');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bandas diseñado con cheby1')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 % cheby2
 % cheby2 - Filtro paso bandas
@@ -207,12 +143,6 @@ grid on;
 save('cheby2_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Paso bandas con cheby2');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro paso bandas diseñado con cheby2')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 %% Filtros supresores de banda
@@ -220,24 +150,12 @@ grid on;
 [b, a] = ellip(N, Rp, Rs, [Wl Wh], 'stop'); % Diseño del filtro
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Rechaza bandas con ellip');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro rechaza bandas diseñado con ellip')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % butter
 [b, a] = butter(N, [Wl Wh], 'stop');
 
 [h, w] = freqz(b, a, 1024, Fs); % Visualización de la respuesta en frecuencia
-figure('name', 'Rechaza bandas con butter');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro rechaza bandas diseñado con butter')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 % cheby1
@@ -247,12 +165,7 @@ grid on;
 save('cheby1_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Rechaza bandas con cheby1');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro rechaza bandas diseñado con cheby1')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
+
 
 % cheby2
 % cheby2 - Filtro supresor de banda
@@ -261,12 +174,6 @@ grid on;
 save('cheby2_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 [h, w] = freqz(b, a, 1024, Fs);
-figure('name', 'Rechaza bandas con cheby2');
-plot(w, 20*log10(abs(h)))
-title('Respuesta en frecuencia del filtro rechaza bandas diseñado con cheby2')
-xlabel('Frecuencia (Hz)')
-ylabel('Amplitud (dB)')
-grid on;
 
 
 %%%%%%%%%
