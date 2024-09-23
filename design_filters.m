@@ -89,19 +89,15 @@ ylabel('Amplitud (dB)')
 grid on;
 
 % cheby2
-% TODO Lizzy
-
-
-
-
-
-
-
-
-
-
-
-
+% cheby2 - Filtro paso bajos
+[b, a] = cheby2(N, Rs, Wp_pb, 'low');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso bajos con cheby2');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso bajos diseñado con cheby2')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 
 %% Filtros paso altos
@@ -142,19 +138,15 @@ grid on;
 
 
 % cheby2
-% TODO Lizzy
-
-
-
-
-
-
-
-
-
-
-
-
+% cheby2 - Filtro paso altos
+[b, a] = cheby2(N, Rs, Wp_pa, 'high');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso altos con cheby2');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso altos diseñado con cheby2')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 
 %% Filtros paso bandas
@@ -194,19 +186,15 @@ ylabel('Amplitud (dB)')
 grid on;
 
 % cheby2
-% TODO Lizzy
-
-
-
-
-
-
-
-
-
-
-
-
+% cheby2 - Filtro paso bandas
+[b, a] = cheby2(N, Rs, [Wl Wh]);
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso bandas con cheby2');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso bandas diseñado con cheby2')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 
 %% Filtros supresores de banda
@@ -246,19 +234,15 @@ ylabel('Amplitud (dB)')
 grid on;
 
 % cheby2
-% TODO Lizzy
-
-
-
-
-
-
-
-
-
-
-
-
+% cheby2 - Filtro supresor de banda
+[b, a] = cheby2(N, Rs, [Wl Wh], 'stop');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Rechaza bandas con cheby2');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro rechaza bandas diseñado con cheby2')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 
 %%%%%%%%%
