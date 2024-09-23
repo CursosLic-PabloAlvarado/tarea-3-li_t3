@@ -78,7 +78,15 @@ grid on;
 
 
 % cheby1
-% TODO Lizzy
+% cheby1 - Filtro paso bajos
+[b, a] = cheby1(N, Rp, Wp_pb, 'low');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso bajos con cheby1');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso bajos diseñado con cheby1')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 % cheby2
 % TODO Lizzy
@@ -122,7 +130,15 @@ grid on;
 
 
 % cheby1
-% TODO Lizzy
+% cheby1 - Filtro paso altos
+[b, a] = cheby1(N, Rp, Wp_pa, 'high');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso altos con cheby1');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso altos diseñado con cheby1')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 
 % cheby2
@@ -167,8 +183,15 @@ grid on;
 
 
 % cheby1
-% TODO Lizzy
-
+% cheby1 - Filtro paso bandas
+[b, a] = cheby1(N, Rp, [Wl Wh]);
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Paso bandas con cheby1');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro paso bandas diseñado con cheby1')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 % cheby2
 % TODO Lizzy
@@ -212,7 +235,15 @@ grid on;
 
 
 % cheby1
-% TODO Lizzy
+% cheby1 - Filtro supresor de banda
+[b, a] = cheby1(N, Rp, [Wl Wh], 'stop');
+[h, w] = freqz(b, a, 1024, Fs);
+figure('name', 'Rechaza bandas con cheby1');
+plot(w, 20*log10(abs(h)))
+title('Respuesta en frecuencia del filtro rechaza bandas diseñado con cheby1')
+xlabel('Frecuencia (Hz)')
+ylabel('Amplitud (dB)')
+grid on;
 
 % cheby2
 % TODO Lizzy
