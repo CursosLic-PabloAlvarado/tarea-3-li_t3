@@ -80,6 +80,9 @@ grid on;
 % cheby1
 % cheby1 - Filtro paso bajos
 [b, a] = cheby1(N, Rp, Wp_pb, 'low');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby1_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso bajos con cheby1');
 plot(w, 20*log10(abs(h)))
@@ -91,6 +94,9 @@ grid on;
 % cheby2
 % cheby2 - Filtro paso bajos
 [b, a] = cheby2(N, Rs, Wp_pb, 'low');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby2_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso bajos con cheby2');
 plot(w, 20*log10(abs(h)))
@@ -128,6 +134,9 @@ grid on;
 % cheby1
 % cheby1 - Filtro paso altos
 [b, a] = cheby1(N, Rp, Wp_pa, 'high');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby1_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso altos con cheby1');
 plot(w, 20*log10(abs(h)))
@@ -140,6 +149,9 @@ grid on;
 % cheby2
 % cheby2 - Filtro paso altos
 [b, a] = cheby2(N, Rs, Wp_pa, 'high');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby2_highpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso altos con cheby2');
 plot(w, 20*log10(abs(h)))
@@ -177,6 +189,9 @@ grid on;
 % cheby1
 % cheby1 - Filtro paso bandas
 [b, a] = cheby1(N, Rp, [Wl Wh]);
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby1_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso bandas con cheby1');
 plot(w, 20*log10(abs(h)))
@@ -188,6 +203,9 @@ grid on;
 % cheby2
 % cheby2 - Filtro paso bandas
 [b, a] = cheby2(N, Rs, [Wl Wh]);
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby2_bandpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Paso bandas con cheby2');
 plot(w, 20*log10(abs(h)))
@@ -225,6 +243,9 @@ grid on;
 % cheby1
 % cheby1 - Filtro supresor de banda
 [b, a] = cheby1(N, Rp, [Wl Wh], 'stop');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby1_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Rechaza bandas con cheby1');
 plot(w, 20*log10(abs(h)))
@@ -236,6 +257,9 @@ grid on;
 % cheby2
 % cheby2 - Filtro supresor de banda
 [b, a] = cheby2(N, Rs, [Wl Wh], 'stop');
+[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+save('cheby2_bandstop.mat', 'sos');  % Guarda los coeficientes en formato .mat
+
 [h, w] = freqz(b, a, 1024, Fs);
 figure('name', 'Rechaza bandas con cheby2');
 plot(w, 20*log10(abs(h)))
