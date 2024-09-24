@@ -1,13 +1,20 @@
 function listen_filter(filterFileName, audioFileName, Fs = 44100)
 
-  [archivo, fs] = audioread('Audios/voz7.wav');
-  if (fs != Fs)
-    % TODO: Utilizar la función resample para asegurar que las muestras del archivo
-    % utilizan la frecuencia de muestreo indicada en la función (con la que fueron
-    % diseñados los filtros)
-  endif
+    % Cargar la matriz SOS
+    data = load(filterFileName, 'sos');
+    sos = data.sos;
 
-  % TODO: Permitir escuchar el audio audioFileName al que le es aplicado el filtro con la función filter
+    [file, wavFs] = audioread(audioFileName);
+
+    if wavFs ~= Fs
+        disp(['Re-muestreando de ', num2str(wavFs), ' Hz a ', num2str(Fs), ' Hz.']);
+        file = resample(file, Fs, wavFs);  % Re-muestrear a la Fs deseada
+    end
+
+    % Aplicar el filtro
+    file_filtered = sosfilt(sos, file);
+
+    sound(file_filtered, Fs);
 
 endfunction
 
