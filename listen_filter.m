@@ -1,5 +1,7 @@
 function listen_filter(filterFileName, audioFileName, Fs = 44100)
 
+    my_route = './SavedFilters/';
+
     % Cargar la matriz SOS
     data = load(filterFileName, 'sos');
     sos = data.sos;
