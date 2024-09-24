@@ -6,11 +6,8 @@ function viewfreqresp(filename, Fs = 44100)
     % Convertir SOS a numerador/denominador
     [b, a] = sos2tf(sos);
 
-    % Generar vector de frecuencias
     w = logspace(log10(1), log10(Fs/2), 1000);
-
-    % Convertir frecuencias a radianes por segundo
-    w_rad = w * 2 * pi / Fs;
+    w_rad = w * 2 * pi / Fs; % radianes
 
     % Evaluar la función de transferencia en estos puntos de numerador y
     % denominador en un conjunto de puntos que representan la transformada Z
@@ -19,7 +16,6 @@ function viewfreqresp(filename, Fs = 44100)
     % Plot de magnitud
     figure;
     subplot(2, 1, 1);
-    %semilogx(w, 20*log10(abs(H)));  % Magnitud en dB
     semilogx(w, 20*log10(abs(H)), 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Magnitud en dB
     grid on;
     title('Respuesta en Magnitud');
