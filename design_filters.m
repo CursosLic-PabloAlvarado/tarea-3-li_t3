@@ -34,7 +34,7 @@ Wh    = Wh / (Fs/2);     % Frecuencia de corte superior para paso bandas y supre
                                          % Donde 'a' y 'b' corresponden a los coeficientes
                                          % devueltos por el filtro butter (estos definen la
                                          % ecuación de diferencia del filtro digital)
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('ellip_lowpass.mat', 'sos');
 
 
@@ -42,19 +42,19 @@ save('ellip_lowpass.mat', 'sos');
 %         Note que: Tiene una respuesta inherentemente plana en la banda pasante, por lo que
 %                   no necesita de un tipo de rizado
 [b, a] = butter(N, Wp_pb, 'low');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('butter_lowpass.mat', 'sos');
 
 
 % cheby1
 [b, a] = cheby1(N, Rp, Wp_pb, 'low');
-[sos, g] = tf2sos(b, a);  % Conversión a SOS con ganancia
+sos = tf2sos(b, a);  % Conversión a SOS con ganancia
 save('cheby1_lowpass.mat', 'sos');  % Guarda los coeficientes en formato .mat
 
 
 % cheby2
 [b, a] = cheby2(N, Rs, Wp_pb, 'low');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby2_lowpass.mat', 'sos');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,25 +62,25 @@ save('cheby2_lowpass.mat', 'sos');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ellip
 [b, a] = ellip(N, Rp, Rs, Wp_pa, 'high');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('ellip_highpass.mat', 'sos');
 
 
 % butter
 [b, a] = butter(N, Wp_pa, 'high');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('butter_highpass.mat', 'sos');
 
 
 % cheby1
 [b, a] = cheby1(N, Rp, Wp_pa, 'high');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby1_highpass.mat', 'sos');
 
 
 % cheby2
 [b, a] = cheby2(N, Rs, Wp_pa, 'high');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby2_highpass.mat', 'sos');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -88,25 +88,25 @@ save('cheby2_highpass.mat', 'sos');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ellip
 [b, a] = ellip(N, Rp, Rs, [Wl Wh]);
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('ellip_bandpass.mat', 'sos');
 
 
 % butter
 [b, a] = butter(N, [Wl Wh]);
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('butter_bandpass.mat', 'sos');
 
 
 % cheby1
 [b, a] = cheby1(N, Rp, [Wl Wh]);
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby1_bandpass.mat', 'sos');
 
 
 % cheby2
 [b, a] = cheby2(N, Rs, [Wl Wh]);
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby2_bandpass.mat', 'sos');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,25 +114,25 @@ save('cheby2_bandpass.mat', 'sos');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ellip
 [b, a] = ellip(N, Rp, Rs, [Wl Wh], 'stop');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('ellip_bandstop.mat', 'sos');
 
 
 % butter
 [b, a] = butter(N, [Wl Wh], 'stop');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('butter_bandstop.mat', 'sos');
 
 
 % cheby1
 [b, a] = cheby1(N, Rp, [Wl Wh], 'stop');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby1_bandstop.mat', 'sos');
 
 
 % cheby2
 [b, a] = cheby2(N, Rs, [Wl Wh], 'stop');
-[sos, g] = tf2sos(b, a);
+sos = tf2sos(b, a);
 save('cheby2_bandstop.mat', 'sos');
 
 
