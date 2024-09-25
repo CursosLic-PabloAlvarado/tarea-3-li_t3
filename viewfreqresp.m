@@ -1,4 +1,7 @@
 function viewfreqresp(filename, Fs = 44100)
+    pkg load signal
+    close all
+
     % Cargar la matriz SOS desde el archivo .mat
     data = load(filename, "sos");
     sos = data.sos;
@@ -14,7 +17,7 @@ function viewfreqresp(filename, Fs = 44100)
     H = polyval(b, exp(-1i * w_rad)) ./ polyval(a, exp(-1i * w_rad));
 
     % Plot de magnitud
-    figure;
+    figure('name', filename);
     subplot(2, 1, 1);
     semilogx(w, 20*log10(abs(H)), 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Magnitud en dB
     grid on;
@@ -23,9 +26,14 @@ function viewfreqresp(filename, Fs = 44100)
     ylabel('Magnitud [dB]');
     axis tight;
 
+    % Calcular y ajustar la fase
+    phase_degrees = unwrap(angle(H)) * (180 / -pi);
+    phase_degrees = mod(phase_degrees + 360, 360) - 360; % Ajustar la fase a -360 a 0 grados
+
     % Plot de fase
     subplot(2, 1, 2);
-    semilogx(w, unwrap(angle(H))*180/pi, 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Fase en grados
+    semilogx(w, phase_degrees, 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Fase en grados
+
     grid on;
     title('Respuesta en Fase');
     xlabel('Frecuencia [Hz]');
@@ -33,8 +41,8 @@ function viewfreqresp(filename, Fs = 44100)
     axis tight;
 
     % Diagrama de polos y ceros
-    figure;
-    zplane(b, a);
-    title('Diagrama de Polos y Ceros');
+    %figure;
+    %zplane(b, a);
+    %title('Diagrama de Polos y Ceros');
 endfunction
 
