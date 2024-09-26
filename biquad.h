@@ -11,11 +11,12 @@ class biquad : public jack::client{
         virtual bool process(jack_nframes_t nframes, const sample_t * const in, 
                              sample_t * const out) override;
     private:
-        double _a0;
-        double _a1;
-        double _a2;
-        double _b1;
-        double _b2;
+        double a0;
+        double a1;
+        double a2;
+        double b0;
+        double b1;
+        double b2;
         double x1, x2;
         double y1, y2;
 }; 

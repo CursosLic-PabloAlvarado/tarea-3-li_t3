@@ -5,7 +5,7 @@ biquad::biquad() {}
 
 
 // Implementación del método para procesar muestras
-bool process(jack_nframes_t nframes, const sample_t * const in, sample_t * const out) {
+bool biquad::process(jack_nframes_t nframes, const sample_t * const in, sample_t * const out) {
     
     for (size_t i = 0; i < nframes; ++i) {
         // Filtrar la muestra actual
@@ -22,3 +22,4 @@ bool process(jack_nframes_t nframes, const sample_t * const in, sample_t * const
         out[i] = y0;
     }
 }
+

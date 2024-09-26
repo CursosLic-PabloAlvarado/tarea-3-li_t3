@@ -68,7 +68,6 @@ std::vector< std::vector<T> > parse_filter(const std::string& filename) {
         
     sos_matrix.push_back(std::move(row));
   }
-    
   return sos_matrix;
 }
 

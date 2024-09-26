@@ -57,6 +57,8 @@
 
 #include "parse_filter.h"
 
+#include "biquad.h"
+
 namespace po=boost::program_options;
 
 /**
@@ -78,6 +80,9 @@ int main (int argc, char *argv[])
   
   try {
     static passthrough_client client;
+
+    //biquad b();
+    //b.set_coefficients(1.9999934219102573, .0, 0.0, 0.0, 0.0);  
 
     typedef jack::client::sample_t sample_t;
     
