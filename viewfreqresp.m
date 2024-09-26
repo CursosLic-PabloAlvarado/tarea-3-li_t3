@@ -14,7 +14,7 @@ function viewfreqresp(filename, Fs = 44100)
 
     % Evaluar la función de transferencia en estos puntos de numerador y
     % denominador en un conjunto de puntos que representan la transformada Z
-    H = polyval(b, exp(-1i * w_rad)) ./ polyval(a, exp(-1i * w_rad));
+    H = polyval(b, exp(1i * w_rad)) ./ polyval(a, exp(1i * w_rad));
 
     % Plot de magnitud
     figure('name', filename);
@@ -27,8 +27,8 @@ function viewfreqresp(filename, Fs = 44100)
     axis tight;
 
     % Calcular y ajustar la fase
-    phase_degrees = unwrap(angle(H)) * (180 / -pi);
-    phase_degrees = mod(phase_degrees + 360, 360) - 360; % Ajustar la fase a -360 a 0 grados
+    phase_degrees = angle(H) * (180 / pi);
+    phase_degrees = mod(phase_degrees, 360) - 360; % Ajustar la fase a -360 a 0 grados
 
     % Plot de fase
     subplot(2, 1, 2);
@@ -41,8 +41,8 @@ function viewfreqresp(filename, Fs = 44100)
     axis tight;
 
     % Diagrama de polos y ceros
-    %figure;
-    %zplane(b, a);
-    %title('Diagrama de Polos y Ceros');
+    figure;
+    zplane(b, a);
+    title('Diagrama de Polos y Ceros');
 endfunction
 
