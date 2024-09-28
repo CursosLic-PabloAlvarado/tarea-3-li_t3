@@ -53,10 +53,11 @@
 #include <boost/program_options.hpp>
 
 #include "waitkey.h"
-#include "passthrough_client.h"
 
 #include "parse_filter.h"
+#include "filter_client.h"
 
+//#include "passthrough_client.h"
 #include "biquad.h"
 
 namespace po=boost::program_options;
@@ -79,11 +80,8 @@ int main (int argc, char *argv[])
 
   
   try {
-    static passthrough_client client;
-
-    //biquad b();
-    //b.set_coefficients(1.9999934219102573, .0, 0.0, 0.0, 0.0);  
-
+    //static passthrough_client client;
+    static filter_client client;
     typedef jack::client::sample_t sample_t;
     
     // Filter coefficients
@@ -145,8 +143,8 @@ int main (int argc, char *argv[])
           go_away=true;
           std::cout << "Finishing..." << std::endl;
         } break;
-        case 'r': {
 
+        case 'r': {
           if (vm.count("files")) {
             const std::vector< std::filesystem::path >&
               audio_files =
@@ -161,6 +159,19 @@ int main (int argc, char *argv[])
           
           std::cout << "Repeat playing files" << std::endl;
         } break;
+
+        case 'p': {
+          client.set_test_filter_active(true);
+          client.set_main_filter_active(false);
+          std::cout << "Test filter activated" << std::endl;
+        }
+
+        case 'c': {
+          client.set_main_filter_active(true);
+          client.set_test_filter_active(false);  
+          std::cout << "Filter activated" << std::endl;
+        }
+
         default: {
           if (key>32) {
             std::cout << "Key " << char(key) << " pressed" << std::endl;
