@@ -1,26 +1,23 @@
 #ifndef BIQUAD_H
 #define BIQUAD_H
 
-#include "jack_client.h"
+#include <jack/jack.h>
+#include <array>
 
-class biquad : public jack::client{
-    public:
-        biquad();
-        ~biquad();
-        void set_coefficients(double a0, double a1, double a2, double b1, double b2);
-        virtual bool process(jack_nframes_t nframes, const sample_t * const in, 
-                             sample_t * const out) override;
-    private:
-        double a0;
-        double a1;
-        double a2;
-        double b0;
-        double b1;
-        double b2;
-        double x1, x2;
-        double y1, y2;
-}; 
+class biquad {
+private:
+    std::array<float, 3> a; // Coeficientes del denominador
+    std::array<float, 3> b; // Coeficientes del numerador
+    std::array<float, 2> x; // Estado de entrada
+    std::array<float, 2> y; // Estado de salida
 
+public:
+    biquad();
+    ~biquad();
 
+    void setCoefficients(const float* coeffs);
+    void reset();
+    void process(jack_nframes_t nframes, const jack_default_audio_sample_t* in, jack_default_audio_sample_t* out);
+};
 
 #endif
