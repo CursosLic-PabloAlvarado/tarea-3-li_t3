@@ -2,7 +2,7 @@
 #define FILTER_CLIENT_H
 
 #include "jack_client.h"
-#include "passthrough_client.h"
+//#include "passthrough_client.h"
 #include "biquad.h"
 #include "cascade.h"
 #include <vector>
@@ -16,11 +16,13 @@ private:
 
 public:
     filter_client();
-    ~filter_client() override;
+    ~filter_client();
 
-    bool process(jack_nframes_t nframes, 
-                 const jack_default_audio_sample_t* const in,
-                 jack_default_audio_sample_t* const out) override;
+    //virtual jack::client_state init() override;
+
+    virtual bool process(jack_nframes_t nframes, 
+                 const sample_t* const in,
+                 sample_t* const out) override;
 
     void set_test_filter_active(bool active);
     void set_main_filter_active(bool active);
@@ -28,3 +30,4 @@ public:
 };
 
 #endif
+

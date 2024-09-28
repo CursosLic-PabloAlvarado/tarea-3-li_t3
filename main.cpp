@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
   
   try {
     //static passthrough_client client;
-    static filter_client client;
+    filter_client client;
     typedef jack::client::sample_t sample_t;
     
     // Filter coefficients

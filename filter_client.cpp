@@ -1,8 +1,8 @@
 #include "filter_client.h"
 #include <cstring>
 
-filter_client::filter_client()
-    : jack::client(),
+filter_client::filter_client(): 
+      jack::client(),
       use_test_filter(false),
       use_main_filter(false)
 {
@@ -12,12 +12,11 @@ filter_client::filter_client()
 }
 
 filter_client::~filter_client() {
-    // No es necesario realizar acciones específicas en el destructor
 }
 
 bool filter_client::process(jack_nframes_t nframes, 
-                            const jack_default_audio_sample_t* const in,
-                            jack_default_audio_sample_t* const out) {
+                            const sample_t* const in,
+                            sample_t* const out)  {
     if (use_test_filter) {
         test_filter.process(nframes, in, out);
     } else if (use_main_filter) {

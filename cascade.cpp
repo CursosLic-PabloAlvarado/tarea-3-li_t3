@@ -1,6 +1,10 @@
 #include "cascade.h"
 #include <cstring> // Añadimos esta línea para incluir memcpy
 
+
+cascade::cascade() {
+}
+
 cascade::cascade(const std::vector<std::vector<float>>& coeffs) {
     stages.reserve(coeffs.size());
     for (const auto& stage_coeffs : coeffs) {
