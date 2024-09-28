@@ -12,6 +12,7 @@ public:
     cascade();
     cascade(const std::vector<std::vector<float>>& coeffs);
     void process(jack_nframes_t nframes, const jack_default_audio_sample_t* in, jack_default_audio_sample_t* out);
+    bool is_empty() const;
 };
 
 #endif
