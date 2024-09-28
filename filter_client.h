@@ -1,41 +1,30 @@
-#ifndef _FILTER_CLIENT_H
-#define _FILTER_CLIENT_H
+#ifndef FILTER_CLIENT_H
+#define FILTER_CLIENT_H
 
-#include "parse_filter.h"
 #include "jack_client.h"
-
-#include <fstream>
-#include <iostream>
+#include "passthrough_client.h"
+#include "biquad.h"
+#include "cascade.h"
 #include <vector>
-#include <string>
-#include <boost/tokenizer.hpp>
-#include <boost/lexical_cast.hpp>
 
-template <typename T>
-std::vector< std::vector<T> > parse_filter(const std::string& filename) {
-  std::vector< std::vector<T> > sos_matrix;
-  std::ifstream file(filename);
-  std::string line;
+class filter_client : public jack::client {
+private:
+    biquad test_filter;
+    cascade main_filter;
+    bool use_test_filter;
+    bool use_main_filter;
 
-  std::locale::global(std::locale::classic()); // Force "C" locale globally
-  
-  while (std::getline(file, line)) {
-    if (line.empty() || line[0] == '#') {
-      continue;  // Skip comments and empty lines
-    }
-    
-    boost::char_separator<char> sep(" \t");
-    boost::tokenizer< boost::char_separator<char> > tok(line,sep);
-    std::vector<T> row;
-    
-    for (const auto& token : tok) {
-      row.push_back(boost::lexical_cast<T>(token));
-    }
-        
-    sos_matrix.push_back(std::move(row));
-  }
-    
-  return sos_matrix;
-}
+public:
+    filter_client();
+    ~filter_client() override;
+
+    bool process(jack_nframes_t nframes, 
+                 const jack_default_audio_sample_t* const in,
+                 jack_default_audio_sample_t* const out) override;
+
+    void set_test_filter_active(bool active);
+    void set_main_filter_active(bool active);
+    void set_filter_coeffs(const std::vector<std::vector<float>>& coeffs);
+};
 
 #endif
