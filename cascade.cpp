@@ -4,6 +4,23 @@
 
 cascade::cascade() {
 }
+
+cascade::~cascade(){    
+}
+
+void cascade::addFilter(const biquad& filter) {
+    stages.push_back(filter);
+}
+
+float cascade::process(float input) {
+    float output = input;
+    // Aplicar cada filtro biquad en serie
+    for (auto& stage : stages) {
+        output = stage.process(output);
+    }
+    return output;
+}
+
 /*
 cascade::cascade(const std::vector<std::vector<float>>& coeffs) {
     stages.reserve(coeffs.size());
@@ -13,7 +30,8 @@ cascade::cascade(const std::vector<std::vector<float>>& coeffs) {
         stages.push_back(stage);
     }
 }
-
+*/
+/*
 void cascade::process(jack_nframes_t nframes, const jack_default_audio_sample_t* in, jack_default_audio_sample_t* out) {
     std::vector<jack_default_audio_sample_t> temp(nframes);
     
@@ -30,3 +48,9 @@ void cascade::process(jack_nframes_t nframes, const jack_default_audio_sample_t*
     }
 }
 */
+
+void cascade::reset() {
+    for (auto& stage : stages) {
+        stage.reset();
+    }
+}

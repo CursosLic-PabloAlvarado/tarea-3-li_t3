@@ -22,7 +22,7 @@ public:
     float process(float input);
     void reset();
 
-    void switch_state();
+    void setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_);
 };
 
 #endif // BIQUAD_H

@@ -125,6 +125,16 @@ int main (int argc, char *argv[])
       filter_coefs = parse_filter<sample_t>(filter_file);
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
+
+      /*
+      b0 = 0.00012044276552320411;
+      b1 = 0.00024088614702277451;
+      b2 = 0.00012044338150272061;
+
+      a1 = -1.8991886908811022;
+      a2 = 0.90277707520710537;
+      */
+      client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
     }
 
     

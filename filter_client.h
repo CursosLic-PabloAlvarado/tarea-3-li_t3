@@ -9,17 +9,15 @@
 
 class filter_client : public jack::client {
 private:
-    /*cascade main_filter;
-    bool use_test_filter;
-    bool use_main_filter;*/
-
     passthrough_client pt_client;
     biquad bq_client;
+    cascade main_filter;
 
 public:
     enum class State {
         Passthrough,
-        Biquad
+        Biquad,
+        Cascade
     };
 
     State current_state;
@@ -34,6 +32,7 @@ public:
                  sample_t* const out) override;
 
     void change_state(State new_state);
+    void setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_);
 
 
     void set_filter_coeffs(const std::vector<std::vector<float>>& coeffs);

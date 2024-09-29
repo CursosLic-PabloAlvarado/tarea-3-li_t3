@@ -11,29 +11,32 @@ biquad::biquad() {
     y = {0.0f, 0.0f};
     */
 
+    /*
     b0 = 0.00012044276552320411;
     b1 = 0.00024088614702277451;
     b2 = 0.00012044338150272061;
 
     a1 = -1.8991886908811022;
     a2 = 0.90277707520710537;
-
+    */
     z1 = 0;
     z2 = 0;
-
+    
 } // Inicializa el filtro pasatodo por defecto
 
 biquad::~biquad() {
 } // Destructor, actualmente no necesario pero definido por completitud
 
-/*
-void biquad::setCoefficients(const float* coeffs) {
-    std::memcpy(b.data(), coeffs, 3 * sizeof(float));
-    std::memcpy(a.data() + 1, coeffs + 3, 2 * sizeof(float));
-    // Nota: a[0] siempre debe ser 1 para un filtro biquad normalizado
-    a[0] = 1.0f;
+
+void biquad::setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_) {
+    b0 = b0_;
+    b1 = b1_;
+    b2 = b2_;
+    a1 = a1_;
+    a2 = a2_;
+    reset();  // Opcionalmente resetear los estados al cambiar coeficientes
 }
-*/
+
 
 void biquad::reset() {
     z1 = 0;
