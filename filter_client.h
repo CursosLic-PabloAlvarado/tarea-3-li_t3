@@ -9,17 +9,14 @@
 
 class filter_client : public jack::client {
 private:
-    /*cascade main_filter;
-    bool use_test_filter;
-    bool use_main_filter;*/
-
     passthrough_client pt_client;
-    biquad bq_client;
+    //biquad bq_client;
+    cascade cascade_filter; // TODO: Usar para implementar cascade
 
 public:
     enum class State {
         Passthrough,
-        Biquad
+        CascadeFilter 
     };
 
     State current_state;
@@ -35,8 +32,8 @@ public:
 
     void change_state(State new_state);
 
-
-    void set_filter_coeffs(const std::vector<std::vector<float>>& coeffs);
+    // Modificar esta función para configurar la cascada de filtros
+    void set_filter_coeffs(const std::vector<std::vector<sample_t>>& coeffs);
 };
 
 #endif

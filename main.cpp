@@ -123,6 +123,7 @@ int main (int argc, char *argv[])
 
     if (vm.count("coeffs")) {
       filter_coefs = parse_filter<sample_t>(filter_file);
+      client.set_filter_coeffs(filter_coefs);
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
     }
@@ -164,12 +165,13 @@ int main (int argc, char *argv[])
 
         case 'p': {
           std::cout << "Test filter activated" << std::endl;
-          client.change_state(filter_client::State::Biquad);
+          client.change_state(filter_client::State::Passthrough);
           break;
         }
 
         case 'c': {
-          client.change_state(filter_client::State::Passthrough);
+          client.set_filter_coeffs(filter_coefs);
+          client.change_state(filter_client::State::CascadeFilter);
           break;
         }
 

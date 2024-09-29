@@ -3,20 +3,13 @@
 
 
 biquad::biquad() {
-    /*
-    // Inicializar coeficientes y estados
-    a = {1.0f, 0.0f, 0.0f};
-    b = {1.0f, 0.0f, 0.0f};
-    x = {0.0f, 0.0f};
-    y = {0.0f, 0.0f};
-    */
 
-    b0 = 0.00012044276552320411;
-    b1 = 0.00024088614702277451;
-    b2 = 0.00012044338150272061;
+    b0 = 0.9244465617731541;
+    b1 = -1.8488882933267354;
+    b2 = 0.92444173157881804;
 
-    a1 = -1.8991886908811022;
-    a2 = 0.90277707520710537;
+    a1 = -1.918570032544294;
+    a2 = 0.92450263188812298;
 
     z1 = 0;
     z2 = 0;
@@ -26,25 +19,25 @@ biquad::biquad() {
 biquad::~biquad() {
 } // Destructor, actualmente no necesario pero definido por completitud
 
-/*
-void biquad::setCoefficients(const float* coeffs) {
-    std::memcpy(b.data(), coeffs, 3 * sizeof(float));
-    std::memcpy(a.data() + 1, coeffs + 3, 2 * sizeof(float));
-    // Nota: a[0] siempre debe ser 1 para un filtro biquad normalizado
-    a[0] = 1.0f;
-}
-*/
-
 void biquad::reset() {
     z1 = 0;
     z2 = 0;
 }
 
 
-float biquad::process(float input) {
+double biquad::process(float input) {
     double output = b0 * input + z1;
     z1 = b1 * input - a1 * output + z2;
     z2 = b2 * input - a2 * output;
     
     return output;
+}
+
+void biquad::set_coefficients(double b0, double b1, double b2, double a1, double a2) {
+    this->b0 = b0;
+    this->b1 = b1;
+    this->b2 = b2;
+    this->a1 = a1;
+    this->a2 = a2;
+    reset();
 }

@@ -19,10 +19,9 @@ public:
 
     //void setCoefficients(const float* coeffs);
     
-    float process(float input);
+    double process(float input);
     void reset();
-
-    void switch_state();
+    void set_coefficients(double b0, double b1, double b2, double a1, double a2);
 };
 
 #endif // BIQUAD_H

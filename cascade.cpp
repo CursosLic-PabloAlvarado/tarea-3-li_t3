@@ -4,6 +4,31 @@
 
 cascade::cascade() {
 }
+
+void cascade::configure(const std::vector<std::vector<double>>& coeffs) {
+    filters.clear();
+    for (const auto& coeff : coeffs) {
+        biquad filter;
+        filter.set_coefficients(coeff[0], coeff[1], coeff[2], coeff[3], coeff[4]);
+        filters.push_back(filter);
+    }
+}
+
+void cascade::process(jack_nframes_t nframes, const float* const in, float* const out) {
+    if (filters.empty()) {
+        std::memcpy(out, in, nframes * sizeof(float));
+        return;
+    }
+
+    for (jack_nframes_t i = 0; i < nframes; ++i) {
+        float sample = in[i];
+        for (auto& filter : filters) {
+            sample = filter.process(sample);
+        }
+        out[i] = sample;
+    }
+}
+
 /*
 cascade::cascade(const std::vector<std::vector<float>>& coeffs) {
     stages.reserve(coeffs.size());
