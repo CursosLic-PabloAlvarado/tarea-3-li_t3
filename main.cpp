@@ -127,15 +127,6 @@ int main (int argc, char *argv[])
                 << filter_file;
     }
 
-    /*
-    double b0 = 2.256457447749483e-05;
-    double b1 = 4.512900052319374e-05;
-    double b2 = 2.2564426046675325e-05;
-    double a1 = -1.9408228439711848;
-    double a2 = 0.94404642946207562;
-
-    biquad my_filter(b0, b1, b2, a1, a2);
-    */
     
     if (client.init() != jack::client_state::Running) {
       throw std::runtime_error("Could not initialize the JACK client");
@@ -172,20 +163,12 @@ int main (int argc, char *argv[])
         } break;
 
         case 'p': {
-          /*client.set_test_filter_active(true);
-          client.set_main_filter_active(false);*/
           std::cout << "Test filter activated" << std::endl;
           client.change_state(filter_client::State::Biquad);
-          //my_filter.switch_state();
           break;
         }
 
         case 'c': {
-          /*
-          client.set_main_filter_active(true);
-          client.set_test_filter_active(false);  
-          std::cout << "Filter activated" << std::endl;
-          */
           client.change_state(filter_client::State::Passthrough);
           break;
         }

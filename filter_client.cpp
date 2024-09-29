@@ -43,13 +43,7 @@ bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sa
             pt_client.process(nframes, in, out);
             break;
     }
-    /*if (use_test_filter) {
-        test_filter.process(nframes, in, out);
-    } else if (use_main_filter) {
-        main_filter.process(nframes, in, out);
-    } else {
-        std::memcpy(out, in, nframes * sizeof(sample_t));
-    }*/
+    
     return true;
 }
 
@@ -58,21 +52,11 @@ void filter_client::change_state(State new_state) {
     std::cout << "State changed to " << static_cast<int>(new_state) << std::endl;
 }
 
+
+
+
+// TODO: Usar para implementar cascade
 /*
-void filter_client::set_test_filter_active(bool active) {
-    use_test_filter = active;
-    if (active) {
-        use_main_filter = false;
-    }
-}
-
-void filter_client::set_main_filter_active(bool active) {
-    use_main_filter = active;
-    if (active) {
-        use_test_filter = false;
-    }
-}
-
 void filter_client::set_filter_coeffs(const std::vector<std::vector<float>>& coeffs) {
     main_filter = cascade(coeffs);
 }

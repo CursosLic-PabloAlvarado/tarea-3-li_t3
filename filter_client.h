@@ -9,8 +9,7 @@
 
 class filter_client : public jack::client {
 private:
-    /*biquad test_filter;
-    cascade main_filter;
+    /*cascade main_filter;
     bool use_test_filter;
     bool use_main_filter;*/
 
@@ -36,8 +35,7 @@ public:
 
     void change_state(State new_state);
 
-    void set_test_filter_active(bool active);
-    void set_main_filter_active(bool active);
+
     void set_filter_coeffs(const std::vector<std::vector<float>>& coeffs);
 };
 
