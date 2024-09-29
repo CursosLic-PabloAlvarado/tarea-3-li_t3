@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/builddir/tarea3",
-            "args": ["-c", "${workspaceFolder}/SavedFilters/butter_lowpass.mat"],
+            "args": ["-c", "${workspaceFolder}/SavedFilters/butter_lowpass.mat", "-f", "Audios/tonos.wav"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

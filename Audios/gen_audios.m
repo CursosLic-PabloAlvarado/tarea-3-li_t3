@@ -1,5 +1,5 @@
 % Generar ruido blanco
-fs = 44100; % Frecuencia de muestreo en Hz
+fs = 48000; % Frecuencia de muestreo en Hz
 duracion = 5; % Duración en segundos
 
 % Ruido blanco

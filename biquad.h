@@ -28,8 +28,8 @@ public:
 
     //void setCoefficients(const float* coeffs);
     
-    void process(jack_nframes_t nframes, const jack_default_audio_sample_t* in, jack_default_audio_sample_t* out);
-    //float process(float input);
+    //void process(jack_nframes_t nframes, const jack_default_audio_sample_t* in, jack_default_audio_sample_t* out);
+    float process(float input);
     void reset();
 
     void switch_state();

@@ -9,10 +9,10 @@
 
 class filter_client : public jack::client {
 private:
-    biquad test_filter;
+    /*biquad test_filter;
     cascade main_filter;
     bool use_test_filter;
-    bool use_main_filter;
+    bool use_main_filter;*/
 
     passthrough_client pt_client;
     biquad bq_client;

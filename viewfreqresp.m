@@ -1,4 +1,4 @@
-function viewfreqresp(filename, Fs = 44100)
+function viewfreqresp(filename, Fs = 48000)
     pkg load signal
     close all
 

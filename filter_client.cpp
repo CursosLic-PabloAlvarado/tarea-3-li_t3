@@ -32,11 +32,10 @@ bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sa
         }
 
         case State::Biquad: {
-            std::cout << "Caca" << std::endl;
-            /*for (jack_nframes_t i = 0; i < nframes; ++i) {
+            for (jack_nframes_t i = 0; i < nframes; ++i) {
                 out[i] = bq_client.process(in[i]);
-            }*/
-            bq_client.process(nframes, in, out);
+            }
+            //bq_client.process(nframes, in, out);
             break;
         }
 

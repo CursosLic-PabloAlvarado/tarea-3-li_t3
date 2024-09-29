@@ -1,5 +1,5 @@
 % Parámetros para el audio
-fs = 44100;  % Frecuencia de muestreo en Hz
+fs = 48000;  % Frecuencia de muestreo en Hz
 t = 0:1/fs:2-1/fs;  % Vector de tiempo para 2 segundos de audio
 silencio = zeros(1, fs);  % Vector de silencio de 1 segundo
 

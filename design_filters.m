@@ -2,7 +2,7 @@ close all
 pkg load signal
 
 %% Constantes
-Fs = 44100; % Frecuencias de muestreo
+Fs = 48000; % Frecuencias de muestreo
 
 Wp_pb = 440;  % Frecuencia de corte para filtro paso bajos (Hz)
 Wp_pa = 600;  % Frecuencia de corte para filtro paso altos (Hz)
