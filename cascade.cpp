@@ -4,7 +4,7 @@
 
 cascade::cascade() {
 }
-
+/*
 cascade::cascade(const std::vector<std::vector<float>>& coeffs) {
     stages.reserve(coeffs.size());
     for (const auto& stage_coeffs : coeffs) {
@@ -29,3 +29,4 @@ void cascade::process(jack_nframes_t nframes, const jack_default_audio_sample_t*
         memcpy(out, temp.data(), nframes * sizeof(jack_default_audio_sample_t));
     }
 }
+*/

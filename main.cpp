@@ -57,7 +57,7 @@
 #include "parse_filter.h"
 #include "filter_client.h"
 
-//#include "passthrough_client.h"
+#include "passthrough_client.h"
 #include "biquad.h"
 
 namespace po=boost::program_options;
@@ -82,6 +82,7 @@ int main (int argc, char *argv[])
   try {
     //static passthrough_client client;
     filter_client client;
+
     typedef jack::client::sample_t sample_t;
     
     // Filter coefficients
@@ -125,6 +126,14 @@ int main (int argc, char *argv[])
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
     }
+
+    double b0 = 1;
+    double b1 = 1.9999934219102573;
+    double b2 = 0.99999342195352925;
+    double a1 = -1.9354451318386461;
+    double a2 = 0.93925447838655429;
+
+    biquad my_filter(b0, b1, b2, a1, a2);
     
     if (client.init() != jack::client_state::Running) {
       throw std::runtime_error("Could not initialize the JACK client");
@@ -161,15 +170,20 @@ int main (int argc, char *argv[])
         } break;
 
         case 'p': {
-          client.set_test_filter_active(true);
-          client.set_main_filter_active(false);
+          /*client.set_test_filter_active(true);
+          client.set_main_filter_active(false);*/
           std::cout << "Test filter activated" << std::endl;
+          client.change_state(filter_client::State::Biquad);
+          //my_filter.switch_state();
+          break;
         }
 
         case 'c': {
+          /*
           client.set_main_filter_active(true);
           client.set_test_filter_active(false);  
           std::cout << "Filter activated" << std::endl;
+          */
         }
 
         default: {
