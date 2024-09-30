@@ -126,23 +126,7 @@ int main (int argc, char *argv[])
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
 
-      /*
-      b0 = 0.00012044276552320411;
-      b1 = 0.00024088614702277451;
-      b2 = 0.00012044338150272061;
-
-      a1 = -1.8991886908811022;
-      a2 = 0.90277707520710537;
-      */
-      /*
-      for (const auto& coefs : filter_coefs) {
-          std::cout << "New liner: " << coefs[0] << " "
-                                     << coefs[1] << " "
-                                     << coefs[2] << " "
-                                     << coefs[4] << " "
-                                     << coefs[5] << std::endl;
-      }
-      */
+      
       cascade filterCascade;
       for (const auto& coefs : filter_coefs) {
           biquad bq;
@@ -153,13 +137,6 @@ int main (int argc, char *argv[])
 
       client.set_cascade(filterCascade);
 
-      /*
-      biquad my_biquad_client;
-      my_biquad_client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
-      client.set_biquad(my_biquad_client);
-      */
-      
-      //client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
     }
 
     
