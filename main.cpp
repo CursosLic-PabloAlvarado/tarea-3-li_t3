@@ -124,6 +124,7 @@ int main (int argc, char *argv[])
       filter_coefs = parse_filter<sample_t>(filter_file);
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
+      client.set_filter_coeffs(filter_coefs);
     }
     
     if (client.init() != jack::client_state::Running) {
@@ -161,15 +162,15 @@ int main (int argc, char *argv[])
         } break;
 
         case 'p': {
-          client.set_test_filter_active(true);
-          client.set_main_filter_active(false);
-          std::cout << "Test filter activated" << std::endl;
+          std::cout << "Test filter (Passthrough) activated" << std::endl;
+          client.change_state(filter_client::State::Passthrough);
+          break;
         }
 
-        case 'c': {
-          client.set_main_filter_active(true);
-          client.set_test_filter_active(false);  
-          std::cout << "Filter activated" << std::endl;
+        case 'c': { 
+          std::cout << "Cascade filter activated" << std::endl;
+          client.change_state(filter_client::State::CascadeFilter);
+          break;
         }
 
         default: {
