@@ -1,5 +1,6 @@
 #include "filter_client.h"
 #include <cstring>
+#include <iostream>
 
 filter_client::filter_client(): 
       jack::client(),
@@ -32,6 +33,14 @@ bool filter_client::process(jack_nframes_t nframes,
 }
 
 void filter_client::set_filter_coeffs(const std::vector<std::vector<float>>& coeffs) {
+    std::cout << "Setting filter coefficients in the client:" << std::endl;
+    for (const auto& set : coeffs) {
+        std::cout << "Coefficients: ";
+        for (auto coeff : set) {
+            std::cout << coeff << " ";
+        }
+        std::cout << std::endl;
+    }
     cascade_filter = cascade(coeffs);
 }
 

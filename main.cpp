@@ -124,7 +124,16 @@ int main (int argc, char *argv[])
       filter_coefs = parse_filter<sample_t>(filter_file);
       std::cout << filter_coefs.size() << " 2nd order filter read from "
                 << filter_file;
-      client.set_filter_coeffs(filter_coefs);
+      //client.set_filter_coeffs(filter_coefs);
+      for (const auto& set : filter_coefs) {
+        std::cout << "Coefficients: ";
+        for (auto coeff : set) {
+            std::cout << coeff << " ";
+        }
+        std::cout << std::endl;
+      }
+
+       client.set_filter_coeffs(filter_coefs);
     }
     
     if (client.init() != jack::client_state::Running) {
