@@ -179,6 +179,11 @@ int main (int argc, char *argv[])
         }
 
         case 'c': {
+          client.change_state(filter_client::State::Cascade);
+          break;
+        }
+
+        case 's': {
           client.change_state(filter_client::State::Passthrough);
           break;
         }

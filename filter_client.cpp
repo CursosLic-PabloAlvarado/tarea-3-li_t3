@@ -43,7 +43,6 @@ bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sa
             for (jack_nframes_t i = 0; i < nframes; ++i) {
                 out[i] = main_filter.process(in[i]);
             }
-            //bq_client.process(nframes, in, out);
             break;
         }
 
