@@ -134,7 +134,32 @@ int main (int argc, char *argv[])
       a1 = -1.8991886908811022;
       a2 = 0.90277707520710537;
       */
-      client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
+      /*
+      for (const auto& coefs : filter_coefs) {
+          std::cout << "New liner: " << coefs[0] << " "
+                                     << coefs[1] << " "
+                                     << coefs[2] << " "
+                                     << coefs[4] << " "
+                                     << coefs[5] << std::endl;
+      }
+      */
+      cascade filterCascade;
+      for (const auto& coefs : filter_coefs) {
+          biquad bq;
+          bq.setCoefficients(coefs[0], coefs[1], coefs[2], coefs[4], coefs[5]);
+
+          filterCascade.addFilter(bq);
+      }
+
+      client.set_cascade(filterCascade);
+
+      /*
+      biquad my_biquad_client;
+      my_biquad_client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
+      client.set_biquad(my_biquad_client);
+      */
+      
+      //client.setCoefficients(0.00012044276552320411, 0.00024088614702277451, 0.00012044338150272061, -1.8991886908811022, 0.90277707520710537);
     }
 
     

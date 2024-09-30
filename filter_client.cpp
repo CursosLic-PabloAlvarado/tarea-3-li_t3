@@ -63,6 +63,13 @@ void filter_client::setCoefficients(double b0_, double b1_, double b2_, double a
     bq_client.setCoefficients(b0_, b1_, b2_, a1_, a2_);
 }
 
+void filter_client::set_biquad(biquad &my_biquad) {
+    bq_client = my_biquad;
+}
+
+void filter_client::set_cascade(cascade &my_cascade) {
+    main_filter = my_cascade;
+}
 
 
 
