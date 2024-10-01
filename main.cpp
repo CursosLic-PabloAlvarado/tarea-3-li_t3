@@ -134,12 +134,9 @@ int main (int argc, char *argv[])
 
           filterCascade.addFilter(bq);
       }
-
       client.set_cascade(filterCascade);
-
     }
 
-    
     if (client.init() != jack::client_state::Running) {
       throw std::runtime_error("Could not initialize the JACK client");
     }

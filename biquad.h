@@ -17,8 +17,6 @@ public:
     biquad();
     ~biquad();
 
-    //void setCoefficients(const float* coeffs);
-    
     float process(float input);
     void reset();
 

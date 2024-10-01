@@ -37,7 +37,6 @@ public:
     void set_biquad(biquad &my_biquad);
     void set_cascade(cascade &my_cascade);
 
-
     void set_filter_coeffs(const std::vector<std::vector<float>>& coeffs);
 };
 

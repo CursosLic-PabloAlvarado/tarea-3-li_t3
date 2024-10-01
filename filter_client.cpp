@@ -3,25 +3,10 @@
 #include <string>
 
 filter_client::filter_client(){
-
 }
-
-
-/*
-filter_client::filter_client(): 
-      jack::client(),
-      use_test_filter(false),
-      use_main_filter(false)
-{
-    // Inicializar test_filter con coeficientes de ejemplo
-    float test_coeffs[6] = {1.0f, -0.5f, 0.25f, 1.0f, 0.1f, 0.05f};
-    test_filter.setCoefficients(test_coeffs);
-}
-*/
 
 filter_client::~filter_client() {
 }
-
 
 bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sample_t* const out)  {
     
@@ -35,7 +20,6 @@ bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sa
             for (jack_nframes_t i = 0; i < nframes; ++i) {
                 out[i] = bq_client.process(in[i]);
             }
-            //bq_client.process(nframes, in, out);
             break;
         }
 
@@ -70,12 +54,3 @@ void filter_client::set_biquad(biquad &my_biquad) {
 void filter_client::set_cascade(cascade &my_cascade) {
     main_filter = my_cascade;
 }
-
-
-
-// TODO: Usar para implementar cascade
-/*
-void filter_client::set_filter_coeffs(const std::vector<std::vector<float>>& coeffs) {
-    main_filter = cascade(coeffs);
-}
-*/
