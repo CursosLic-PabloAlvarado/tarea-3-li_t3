@@ -32,15 +32,15 @@ void biquad::reset() {
     z2 = 0;
 }
 
-inline float biquad::process(float input) {
-    double output = b0 * input + z1;
+inline float biquad::process(const float input) {
+    const float output = b0 * input + z1;
     z1 = b1 * input - a1 * output + z2;
     z2 = b2 * input - a2 * output;
     
     return output;
 }
 
-// Nuevo método para procesar múltiples muestras
+// Procesar múltiples muestras
 void biquad::process(int nframes, const float* in, float* out) {
     for (int i = 0; i < nframes; ++i) {
         out[i] = process(in[i]);
