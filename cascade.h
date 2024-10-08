@@ -13,8 +13,9 @@ public:
     ~cascade(); // Destructor
 
     void addFilter(const biquad& filter); // Método para agregar un filtro biquad a la cascada
-    float process(float input); // Método para procesar una muestra de entrada a través de la cascada
-
+    inline float process(float input); // Método para procesar una muestra de entrada a través de la cascada
+    
+    void process(int nframes, const float* in, float* out);
     void reset(); // Resetea los estados de todos los biquads en cascada
 };
 

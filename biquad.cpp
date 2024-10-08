@@ -18,7 +18,7 @@ biquad::biquad() {
 biquad::~biquad() {
 } 
 
-void biquad::setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_) {
+void biquad::setCoefficients(float b0_, float b1_, float b2_, float a1_, float a2_) {
     b0 = b0_;
     b1 = b1_;
     b2 = b2_;
@@ -32,10 +32,17 @@ void biquad::reset() {
     z2 = 0;
 }
 
-float biquad::process(float input) {
+inline float biquad::process(float input) {
     double output = b0 * input + z1;
     z1 = b1 * input - a1 * output + z2;
     z2 = b2 * input - a2 * output;
     
     return output;
+}
+
+// Nuevo método para procesar múltiples muestras
+void biquad::process(int nframes, const float* in, float* out) {
+    for (int i = 0; i < nframes; ++i) {
+        out[i] = process(in[i]);
+    }
 }

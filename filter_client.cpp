@@ -17,16 +17,12 @@ bool filter_client::process(jack_nframes_t nframes, const sample_t* const in, sa
         }
 
         case State::Biquad: {
-            for (jack_nframes_t i = 0; i < nframes; ++i) {
-                out[i] = bq_client.process(in[i]);
-            }
+            bq_client.process(nframes, in, out);
             break;
         }
 
         case State::Cascade: {
-            for (jack_nframes_t i = 0; i < nframes; ++i) {
-                out[i] = main_filter.process(in[i]);
-            }
+            main_filter.process(nframes, in, out);
             break;
         }
 
@@ -43,7 +39,7 @@ void filter_client::change_state(State new_state) {
     std::cout << "State changed to " << static_cast<int>(new_state) << std::endl;
 }
 
-void filter_client::setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_) {
+void filter_client::setCoefficients(float b0_, float b1_, float b2_, float a1_, float a2_) {
     bq_client.setCoefficients(b0_, b1_, b2_, a1_, a2_);
 }
 

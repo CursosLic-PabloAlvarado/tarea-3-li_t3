@@ -32,7 +32,7 @@ public:
                  sample_t* const out) override;
 
     void change_state(State new_state);
-    void setCoefficients(double b0_, double b1_, double b2_, double a1_, double a2_);
+    void setCoefficients(float b0_, float b1_, float b2_, float a1_, float a2_);
 
     void set_biquad(biquad &my_biquad);
     void set_cascade(cascade &my_cascade);

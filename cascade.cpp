@@ -12,13 +12,21 @@ void cascade::addFilter(const biquad& filter) {
     stages.push_back(filter);
 }
 
-float cascade::process(float input) {
+/*inline float cascade::process(float input) {
     float output = input;
     // Aplicar cada filtro biquad en serie
     for (auto& stage : stages) {
         output = stage.process(output);
     }
     return output;
+}*/
+
+
+void cascade::process(int nframes, const float* in, float* out) {
+    std::memcpy(out, in, nframes * sizeof(float));
+    for (auto& stage : stages) {
+        stage.process(nframes, out, out);
+    }
 }
 
 void cascade::reset() {
