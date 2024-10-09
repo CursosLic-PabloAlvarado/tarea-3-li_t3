@@ -1,6 +1,6 @@
 function viewfreqresp(filename, Fs = 48000)
     pkg load signal
-    close all
+    %close all
 
     % Cargar la matriz SOS desde el archivo .mat
     data = load(filename, "sos");
@@ -22,8 +22,8 @@ function viewfreqresp(filename, Fs = 48000)
     semilogx(w, 20*log10(abs(H)), 'Color', [0, 0.447, 0.741], 'LineWidth', 3);  % Magnitud en dB
     grid on;
     title('Respuesta en Magnitud');
-    xlabel('Frecuencia [Hz]');
-    ylabel('Magnitud [dB]');
+    xlabel('F [Hz]');
+    ylabel('|H(F)| [dB]');
     axis tight;
 
     % Calcular y ajustar la fase
@@ -36,8 +36,8 @@ function viewfreqresp(filename, Fs = 48000)
 
     grid on;
     title('Respuesta en Fase');
-    xlabel('Frecuencia [Hz]');
-    ylabel('Fase (grados)');
+    xlabel('F [Hz]');
+    ylabel('\angle H(F) [°]');
     axis tight;
 
     % Diagrama de polos y ceros
