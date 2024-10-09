@@ -41,8 +41,10 @@ function viewfreqresp(filename, Fs = 48000)
     axis tight;
 
     % Diagrama de polos y ceros
-    figure;
+    figure('name', filename);
     zplane(b, a);
     title('Diagrama de Polos y Ceros');
+
+    pause;
 endfunction
 
