@@ -57,11 +57,11 @@ static void BM_Biquad_Process(benchmark::State& state) {
                       
   int size = state.range(0);
 
-  std::vector<float> input(size);
-  std::vector<float> output(size);
+  float input[size];
+  float output[size];
 
   for (auto _ : state) {
-        dut.process(size, input.data(), output.data());
+        dut.process(size, input, output);
   }
 
   state.SetItemsProcessed(size);  // Optional: Report number of items processed
@@ -86,11 +86,11 @@ static void BM_Cascade_Process(benchmark::State& state) {
   dut.addFilter(filter3);
 
   int size = state.range(0);
-  std::vector<float> input(size);
-  std::vector<float> output(size);
+  float input[size];
+  float output[size];
 
   for (auto _ : state) {
-        dut.process(size, input.data(), output.data());
+        dut.process(size, input, output);
   }
 
   state.SetItemsProcessed(size);  // Optional: Report number of items processed
