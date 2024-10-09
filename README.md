@@ -7,6 +7,12 @@ Este código permite recibir una lista de archivos .wav, que se ejecutan uno tra
 
 |- **SavedFilters/**: Directorio con los archivos `.mat` diseñados con GNU/Octave.
 
+|- **Docs/**: Directorio con los archivos `.pdf`.
+
+|-- `Tarea__3___DSP.pdf`: Informe de la Tarea 3. 
+
+|-- `tarea03.pdf`: Especificación de la Tarea 3.
+
 |- `main.cpp`: Archivo principal que importará, llamará y ejecutará el resto de archivos del proyecto
 
 <br>
@@ -31,7 +37,7 @@ sudo usermod -aG audio $USER
 
 ## Construcción y compilación
 
-Para construir los ejemplos la primera vez utilice:
+Para construir los ejemplos la primera vez en C++ utilice:
 ```bash
 meson setup builddir
 ninja -C builddir
@@ -46,6 +52,31 @@ ninja -C builddir
 
 ## Ejecución
 
+### GNU/Octave
+Para ejecutar el código y obtener las gráficas deseadas:
+1. Sitúese en el directorio ``tarea-3-li_t3/``
+2. Abra una terminal en esta ubicación
+3. Ingrese al modo Octave mediante ejecutar el siguiente comando:
+```Bash
+octave
+```
+4. En modo Octave, para diseñar los filtros llame a la función mediante:
+
+```octave
+design_filters
+```
+5. Para escuchar los Filtros digitales llame a la función mediante:
+
+```octave
+listen_filter('./SavedFilters/método_tipo.mat', 'Audios/audio.wav')
+```
+
+Nota: Para visualizar las Figuras de la Respuesta en Magnitud y Respuesta en Fase así como el Diagrama de Polos y Ceros ejecute, desde la terminal (NO en modo Octave), el siguiente comando:
+```bash
+./run_octave_figures.sh
+```
+
+### C++
 Primeramente se deberá de iniciar, manualmente, el servidor de jack. Para ello ejecute:
 ```bash
 qjackctl
