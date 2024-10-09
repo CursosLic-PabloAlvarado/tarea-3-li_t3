@@ -20,11 +20,6 @@ Wp_pb = Wp_pb / (Fs/2); % Frecuencia de corte pasa bajos normalizada
 Wp_pa = Wp_pa / (Fs/2); % Frecuencia de corte pasa altos normalizada
 Wl    = Wl / (Fs/2);     % Frecuencia de corte inferior para paso bandas y supresores normalizada
 Wh    = Wh / (Fs/2);     % Frecuencia de corte superior para paso bandas y supresores normalizada
-                        % TODO: Explicar en el README porqué es necesario normalizar
-
-
-% TODO: Quitar tanto comentario y mejor meterlo en el README
-% TODO: Explicar cada tipo de filtro en el README
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% Filtros paso bajo %%%%%%%%%%%%%%%
@@ -41,8 +36,6 @@ save([my_route 'ellip_lowpass.mat'], 'sos');
 
 
 % butter (Con parámetros: Orden del filtro, frecuencia de corte normalizada y tipo de filtro).
-%         Note que: Tiene una respuesta inherentemente plana en la banda pasante, por lo que
-%                   no necesita de un tipo de rizado
 [b, a] = butter(N, Wp_pb, 'low');
 sos = tf2sos(b, a);
 save([my_route 'butter_lowpass.mat'], 'sos');
@@ -51,7 +44,7 @@ save([my_route 'butter_lowpass.mat'], 'sos');
 % cheby1
 [b, a] = cheby1(N, Rp, Wp_pb, 'low');
 sos = tf2sos(b, a);  % Conversión a SOS con ganancia
-save([my_route 'cheby1_lowpass.mat'], 'sos');  % Guarda los coeficientes en formato .mat
+save([my_route '_lowpass.mat'], 'sos');  % Guarda los coeficientes en formato .mat
 
 
 % cheby2
@@ -91,7 +84,7 @@ save([my_route 'cheby2_highpass.mat'], 'sos');
 % ellip
 [b, a] = ellip(N, Rp, Rs, [Wl Wh]);
 sos = tf2sos(b, a);
-save([my_route 'ellip_bandpass.mat'], 'sos');
+save([my_route '.mat'], 'sos');
 
 
 % butter
@@ -137,8 +130,3 @@ save([my_route 'cheby1_bandstop.mat'], 'sos');
 sos = tf2sos(b, a);
 save([my_route 'cheby2_bandstop.mat'], 'sos');
 
-
-%%%%%%%%%
-% TODO: Agregar referencias en el README:
-%       - ttps://octave.sourceforge.io/signal/function/ellip.html
-%       - https://octave.sourceforge.io/signal/function/butter.html
